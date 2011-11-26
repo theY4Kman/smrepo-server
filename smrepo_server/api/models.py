@@ -28,6 +28,7 @@ class PluginVersion(models.Model):
     build = models.IntegerField(null=True, blank=True)
     generic = models.CharField(max_length=128, null=True, blank=True)
 
+    name = models.CharField(max_length=128, help_text='The name field extracted from the binary.', null=True, blank=True)
     author = models.CharField(max_length=128, help_text='The author field extracted from the binary.', null=True, blank=True)
     version = models.CharField(max_length=128, help_text='The version field extracted from the binary.', null=True, blank=True)
     description = models.TextField(help_text='The description field extracted from the binary.', null=True, blank=True)

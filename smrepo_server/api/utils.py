@@ -23,4 +23,6 @@ def get_object_or_404_message(klass, message, **kwargs):
 
 def json_response(object, *args, **kwargs):
     kwargs['mimetype'] = 'text/json'
-    return HttpResponse(json.dumps(object), *args, **kwargs)
+    response = HttpResponse(json.dumps(object), *args, **kwargs)
+    response['Content-Disposition'] = 'inline'
+    return response

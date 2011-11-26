@@ -1,5 +1,17 @@
 from django.utils.functional import wraps
-from .utils import RGX_VERSION_STRING
+from .models import Plugin
+from .utils import RGX_VERSION_STRING, json_response
+
+def requires_plugin(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        plugin_name = kwargs.pop('plugin_name')
+        try:
+            kwargs['plugin_ref'] = Plugin.objects.get(name__iexact=plugin_name)
+        except Plugin.DoesNotExist:
+            return json_response({ 'error': 'Plug-in not found' }, status=404)
+        return fn(*args, **kwargs)
+    return wrapper
 
 def version_string(fn):
     @wraps(fn)

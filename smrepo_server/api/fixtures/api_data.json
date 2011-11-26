@@ -63,7 +63,8 @@
       "build": 4,
       "maintenance": 3,
       "minor": 2,
-      "description": "Test plug-in!"
+      "description": "Test plug-in!",
+      "name": "test"
     }
   }
 ]

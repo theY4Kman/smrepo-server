@@ -1,3 +1,4 @@
+import json
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
@@ -37,6 +38,7 @@ class DownloadPluginTest(TestCase):
     fixtures = ['api_data']
 
     def test_plugin_download(self):
+        """Plug-in download without version downloads latest plug-in version"""
         plugin_ref = Plugin.objects.get(pk=1)
         plver_ref = plugin_ref.versions.all()[0]
 
@@ -47,6 +49,7 @@ class DownloadPluginTest(TestCase):
                                                                                                   plver_ref.version_string))
 
     def test_plugin_version_download(self):
+        """Plug-in download with specific version downloads correct version"""
         plugin_ref = Plugin.objects.get(pk=1)
         plver_ref = plugin_ref.versions.all()[0]
 
@@ -60,4 +63,31 @@ class DownloadPluginTest(TestCase):
         self.assertEqual(response['Content-Type'], 'application/x-tar-gz')
         self.assertEqual(response['Content-Disposition'], 'attachment; filename=%s_%s.tar.gz;' % (plugin_ref.name,
                                                                                                   plver_ref.version_string))
+
+
+class PluginVersionsTest(TestCase):
+    fixtures = ['api_data']
+
+    def test_plugin_version(self):
+        """Latest version listed for plug-in"""
+        plugin_ref = Plugin.objects.get(pk=1)
+        plver_ref = plugin_ref.versions.all()[0]
+
+        response = self.client.get(reverse('plugin-version', kwargs={ 'plugin_name': plugin_ref.name }))
+        obj = json.loads(response.content)
+        expected = {
+            'version': plver_ref.version_string,
+            'plugin_author': plugin_ref.author.username,
+            'author': plver_ref.author,
+            'plugin_description': plugin_ref.description,
+            'description': plver_ref.description,
+            'plugin_url': plugin_ref.url,
+            'url': plver_ref.url,
+            'plugin_name': plugin_ref.name,
+            'name': plver_ref.name
+        }
+
+        self.assertEqual(response.status_code, 200, 'Could not retrieve plug-in version')
+        self.assertEqual(obj, expected, 'Response differs from what was expected')
+
 
