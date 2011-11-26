@@ -46,3 +46,21 @@ def plugin_version(request, plugin_ref):
 
     return json_response(obj)
 
+@requires_plugin
+def plugin_versions(request, plugin_ref):
+    versions = plugin_ref.versions.order_by('-major', '-minor', '-maintenance', '-build')
+    def ret(plver_ref):
+        return {
+            'version': plver_ref.version_string,
+            'plugin_author': plugin_ref.author.username,
+            'author': plver_ref.author,
+            'plugin_description': plugin_ref.description,
+            'description': plver_ref.description,
+            'plugin_url': plugin_ref.url,
+            'url': plver_ref.url,
+            'plugin_name': plugin_ref.name,
+            'name': plver_ref.name
+        }
+
+    return json_response(map(ret, versions))
+

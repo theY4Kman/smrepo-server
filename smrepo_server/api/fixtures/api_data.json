@@ -66,5 +66,26 @@
       "description": "Test plug-in!",
       "name": "test"
     }
+  },
+  {
+    "pk": 3,
+    "model": "api.pluginversion",
+    "fields": {
+      "major": 9,
+      "version": "9.8.7.6",
+      "plugin": 1,
+      "generic": null,
+      "source_archive": "./api/fixtures/static/valid_source.tar.gz",
+      "author": "theY4Kman",
+      "creation_date": "2011-11-27 10:28:53",
+      "url": "http://www.sourcemod.net/",
+      "built_archive": "./api/fixtures/static/valid_built.tar.gz",
+      "is_valid": true,
+      "build": 6,
+      "maintenance": 7,
+      "minor": 8,
+      "description": "Test plug-in!",
+      "name": "test"
+    }
   }
 ]
