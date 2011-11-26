@@ -1,0 +1,69 @@
+[
+  {
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+      "username": "they4kman",
+      "first_name": "zach",
+      "last_name": "kanzler",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "groups": [],
+      "user_permissions": [],
+      "email": "they4kman@gmail.com",
+      "date_joined": "2011-11-26 03:10:53"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "api.plugin",
+    "fields": {
+      "url": "http://sourcemod.net",
+      "description": "haha HAHA 1234 \ttab\nnewline",
+      "author": 1,
+      "name": "YAK_YAK_YAK",
+      "creation_date": "2011-11-26 10:04:12"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "api.pluginversion",
+    "fields": {
+      "major": null,
+      "version": null,
+      "plugin": 1,
+      "generic": null,
+      "source_archive": "./api/fixtures/static/invalid_source.tar.gz",
+      "author": null,
+      "creation_date": "2011-11-26 10:26:06",
+      "url": null,
+      "built_archive": "",
+      "is_valid": false,
+      "build": null,
+      "maintenance": null,
+      "minor": null,
+      "description": null
+    }
+  },
+  {
+    "pk": 2,
+    "model": "api.pluginversion",
+    "fields": {
+      "major": 1,
+      "version": "1.2.3.4",
+      "plugin": 1,
+      "generic": null,
+      "source_archive": "./api/fixtures/static/valid_source.tar.gz",
+      "author": "theY4Kman",
+      "creation_date": "2011-11-26 10:28:53",
+      "url": "http://www.sourcemod.net/",
+      "built_archive": "./api/fixtures/static/valid_built.tar.gz",
+      "is_valid": true,
+      "build": 4,
+      "maintenance": 3,
+      "minor": 2,
+      "description": "Test plug-in!"
+    }
+  }
+]
